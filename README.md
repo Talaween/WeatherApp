@@ -13,12 +13,16 @@ This App was developed using the following technologies:
 
 # Running the App
 
-to run the app use 
+to setup the app after clone run 
+```sh
+npm install
+```
+to run the app run 
 ```sh
 npm start
 ```
 
-to run the tests use
+to run the tests run
 ```sh
 npm run test
 ```
