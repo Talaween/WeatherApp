@@ -18,7 +18,7 @@ export const CurrentWeather:React.FC = () => {
             });
     }, []);
 
-    return <Row>
+    return <Row gutter={[32, 0]}>
         {availableCities && availableCities.map( (city) => 
             <Col key={city.name} xs={24} sm={12} md={6} lg={5}>
                 <City 
