@@ -1,11 +1,11 @@
 import { configureStore, Action} from '@reduxjs/toolkit'
-import citiesReducer from '../components/Cities/CitiesSlice';
+import citiesReducer from '../components/CurrentWeather/CitiesSlice';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import { ThunkAction } from 'redux-thunk';
 
 const store = configureStore({
   reducer: {
-    cities: citiesReducer,
+    App: citiesReducer,
   }
 });
 

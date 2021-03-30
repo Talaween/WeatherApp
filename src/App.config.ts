@@ -22,6 +22,6 @@ export const AppConfig:IWeatherAppConfig = {
         'AU',
         'JP',
     ],
-    apiKey: 'ada591dec3864456afe2c2ff2ebe6805',
+    apiKey: '09bc4c48c3a740e983f52f036270109a',
 
 }

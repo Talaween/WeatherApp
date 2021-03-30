@@ -1,7 +1,6 @@
-import { createSlice, createAsyncThunk, PayloadAction  } from '@reduxjs/toolkit'
-import type { RootState } from '../../store/store';
+import { createSlice, PayloadAction  } from '@reduxjs/toolkit'
 import axios from "axios";
-import {AppThunk} from '../../store/store';
+import {AppThunk, RootState} from '../../store/store';
 import {AppConfig} from '../../App.config';
 import { createCity, createWeather} from '../../store/createData';
 import {currentWeatherAPI, forecastWeatherAPI} from '../../api/sources';
@@ -38,9 +37,9 @@ export const getCurrentWeather = (city:ICity): AppThunk => async (dispatch) => {
     try {
         dispatch(setLoading({...city, isLoading:true}));
         const response = await axios.get(currentWeatherAPI(city.name, city.countryCode));
-        dispatch(updateCity({...city, currentWeather: createWeather(response)}));
+        dispatch(updateCurrentWeather({...city, currentWeather: createWeather(response.data)}));
     } catch (error) {
-        dispatch(updateCity({...city, error: error.toString()}));
+        dispatch(updateCurrentWeather({...city, error: error.toString()}));
     } finally {
         dispatch(setLoading({...city, isLoading:false}));
     }
@@ -50,9 +49,9 @@ export const getForcastWeather = (city:ICity): AppThunk => async (dispatch) => {
     try {
         dispatch(setLoading({...city, isLoading:true}));
         const response = await axios.get(forecastWeatherAPI(city.name, city.countryCode));
-        dispatch(updateCity({...city, currentWeather: createWeather(response)}));
+        dispatch(updateForecastWeather({...city, currentWeather: createWeather(response.data)}));
     } catch (error) {
-        dispatch(updateCity({...city, error: error.toString()}));
+        dispatch(updateForecastWeather({...city, error: error.toString()}));
     } finally {
         dispatch(setLoading({...city, isLoading:false}));
     }
@@ -66,18 +65,22 @@ export const CitiesSlice = createSlice({
         const city = state.cities.find(city => city.name === action.payload.name );
         if(city) city.isLoading = action.payload.isLoading;
     },
-    updateCity: (state: ICities, action:PayloadAction<ICity>) => {
-        let city = state.cities.find(city => city.name === action.payload.name );
-        if(city) city = action.payload;
+    updateCurrentWeather: (state, action:PayloadAction<ICity>) => {
+        const city = state.cities.find(city => city.name === action.payload.name );
+        if(city) city.currentWeather = action.payload.currentWeather;
+    },
+    updateForecastWeather: (state, action:PayloadAction<ICity>) => {
+        const city = state.cities.find(city => city.name === action.payload.name );
+        if(city) city.currentWeather = action.payload.currentWeather;
     },
   },
 });
 
-export const {setLoading, updateCity  } = CitiesSlice.actions;
+export const { setLoading, updateCurrentWeather, updateForecastWeather } = CitiesSlice.actions;
+
+export const selectAllCities = (state:RootState) => state.App.cities
+
+export const selectCityByName = (state:RootState, name:string) =>
+  state.App.cities.find( city => city.name === name)
 
 export default CitiesSlice.reducer;
-
-export const selectAllcities = (state:ICities) => state.cities
-
-export const selectCityByName = (state:ICities, name:string) =>
-  state.cities.find( city => city.name === name)
