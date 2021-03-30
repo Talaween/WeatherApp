@@ -23,5 +23,9 @@ export const AppConfig:IWeatherAppConfig = {
         'JP',
     ],
     apiKey: '09bc4c48c3a740e983f52f036270109a',
-
 }
+
+export enum AppState {
+    currentWeather,
+    forecastWeather,
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from 'antd';
+import {Card, Button} from 'antd';
 import './CurrentCityDisplay.css';
 
 export interface CityProps {
@@ -9,7 +9,7 @@ export interface CityProps {
 }
 export const City:React.FC<CityProps> = ({name, state, temp}:CityProps) => {
 
-    return  <Card title={name} style={{ width: 300 }}>
+    return  <Card title={name} style={{ width: 300 }} extra={ <Button type="link" size={'small'}>Weather Forecast</Button>}>
         <p>{'Current Weather State is:'}  <span className="bold">{state}</span></p>
         <p>{'Current Temperature is:'} <span className="bold">{temp}</span> </p>
     </Card>;

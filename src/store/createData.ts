@@ -1,12 +1,12 @@
-import {ICity, IWeather} from '../components/CurrentWeather/CitiesSlice';
+import {ICity, IWeather} from './types';
 
 export const createCity = (name:string, countryCode:string):ICity => {
 
     return {
         name,
         countryCode,
-        currentWeather: null,
-        forecastWeather: null,
+        currentWeather: undefined,
+        forecastWeather: undefined,
         isLoading: false,
     }
 };

@@ -4,34 +4,11 @@ import {AppThunk, RootState} from '../../store/store';
 import {AppConfig} from '../../App.config';
 import { createCity, createWeather} from '../../store/createData';
 import {currentWeatherAPI, forecastWeatherAPI} from '../../api/sources';
+import {ICity} from '../../store/types';
 
-export interface IWeather {
-    dateTime: string;
-    temperature: {
-        temp: number;
-        min: number;
-        max: number;
-    };
-    state: string;
-}
-
-export interface ICity {
-    name : string;
-    countryCode: string;
-    isLoading: boolean;
-    currentWeather : IWeather | null;
-    forecastWeather: Array<IWeather> | null;
-    error?: string;
-};
-
-export interface ICities {
-    cities : Array<ICity>;
-    error?: string;   
-};
-
-const initialState = {
-    cities: AppConfig.cities.map( (item:string, index:number) => createCity(item, AppConfig.countryCode[index] )),
-} as ICities;
+const initialState= AppConfig.cities.map( 
+            (item:string, index:number) => createCity(item, AppConfig.countryCode[index] 
+        ));
 
 export const getCurrentWeather = (city:ICity): AppThunk => async (dispatch) => {
     try {
@@ -39,7 +16,7 @@ export const getCurrentWeather = (city:ICity): AppThunk => async (dispatch) => {
         const response = await axios.get(currentWeatherAPI(city.name, city.countryCode));
         dispatch(updateCurrentWeather({...city, currentWeather: createWeather(response.data)}));
     } catch (error) {
-        dispatch(updateCurrentWeather({...city, error: error.toString()}));
+        dispatch(setError({...city, error: error.toString()}));
     } finally {
         dispatch(setLoading({...city, isLoading:false}));
     }
@@ -51,7 +28,7 @@ export const getForcastWeather = (city:ICity): AppThunk => async (dispatch) => {
         const response = await axios.get(forecastWeatherAPI(city.name, city.countryCode));
         dispatch(updateForecastWeather({...city, currentWeather: createWeather(response.data)}));
     } catch (error) {
-        dispatch(updateForecastWeather({...city, error: error.toString()}));
+        dispatch(setError({...city, error: error.toString()}));
     } finally {
         dispatch(setLoading({...city, isLoading:false}));
     }
@@ -62,25 +39,33 @@ export const CitiesSlice = createSlice({
   initialState,
   reducers: {
     setLoading: (state, action:PayloadAction<ICity>) => {
-        const city = state.cities.find(city => city.name === action.payload.name );
-        if(city) city.isLoading = action.payload.isLoading;
+        const city = state.find(city => city.name === action.payload.name );
+        if(city) 
+            city.isLoading = action.payload.isLoading;
+    },
+    setError: (state, action:PayloadAction<ICity>) => {
+        const city = state.find(city => city.name === action.payload.name );
+        if(city) 
+            city.error = action.payload.error;
     },
     updateCurrentWeather: (state, action:PayloadAction<ICity>) => {
-        const city = state.cities.find(city => city.name === action.payload.name );
-        if(city) city.currentWeather = action.payload.currentWeather;
+        const city = state.find(city => city.name === action.payload.name );
+        if(city) 
+            city.currentWeather = action.payload.currentWeather;
     },
     updateForecastWeather: (state, action:PayloadAction<ICity>) => {
-        const city = state.cities.find(city => city.name === action.payload.name );
-        if(city) city.currentWeather = action.payload.currentWeather;
+        const city = state.find(city => city.name === action.payload.name );
+        if(city) 
+            city.currentWeather = action.payload.currentWeather;
     },
   },
 });
 
-export const { setLoading, updateCurrentWeather, updateForecastWeather } = CitiesSlice.actions;
+export const { setLoading, updateCurrentWeather, updateForecastWeather, setError } = CitiesSlice.actions;
 
-export const selectAllCities = (state:RootState) => state.App.cities
+export const selectAllCities = (state:RootState) => state.cities;
 
 export const selectCityByName = (state:RootState, name:string) =>
-  state.App.cities.find( city => city.name === name)
+  state.cities.find( city => city.name === name)
 
 export default CitiesSlice.reducer;
