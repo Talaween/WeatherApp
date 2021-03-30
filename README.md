@@ -11,16 +11,16 @@ This App was developed using the following technologies:
 * Jest
 * Enzyme
 
-#Running the App
+# Running the App
 
 to run the app use 
-'''sh
+```sh
 npm start
-'''
+```
 
 to run the tests use
-'''sh
+```sh
 npm run test
-'''
+```
 
 code written by Mahmoud Awad awad@talaween.net
