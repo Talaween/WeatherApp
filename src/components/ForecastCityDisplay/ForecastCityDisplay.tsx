@@ -41,7 +41,7 @@ export const ForecastCityDisplay: React.FC = () => {
             dispatch(fetchForcastWeather(city));
     }, [])
     return  city 
-            ? <>
+            ? <React.Fragment key={city.name}>
                 <div className="header">
                     <h2>{city.name} Weather Forecast</h2>
                     <Input className="input" placeholder="Max Temp" onChange={handleMaxChange} />
@@ -49,7 +49,9 @@ export const ForecastCityDisplay: React.FC = () => {
                 </div>
                 
                 <List
-                    grid={{ gutter: 16, column: 4 }}
+                    grid={{ gutter: 16, xs: 2,
+                        sm: 3,
+                        md: 4,}}
                     dataSource={dataSource}
                     renderItem={item => (
                     <List.Item>
@@ -60,7 +62,7 @@ export const ForecastCityDisplay: React.FC = () => {
                     </List.Item>
                     )}
                 />;
-            </>
+            </React.Fragment>
             :  <List
                     grid={{ gutter: 16, column: 4 }}
                     dataSource={undefined}

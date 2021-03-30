@@ -20,7 +20,7 @@ export const CurrentWeather:React.FC = () => {
 
     return <Row>
         {availableCities && availableCities.map( (city) => 
-            <Col key={city.name} span={6}>
+            <Col key={city.name} xs={24} sm={12} md={6} lg={5}>
                 <City 
                     name={city.name} 
                     temp={city.currentWeather?.temperature?.temp}
