@@ -1,6 +1,6 @@
+import { useSelector } from 'react-redux'
 import {CurrentWeather} from '../CurrentWeather/CurrentWeather';
 import {ForecastCityDisplay} from '../ForecastCityDisplay/ForecastCityDisplay';
-import { useSelector } from 'react-redux'
 import {selectDisplay} from './AppDisplaySlice';
 import {isEmpty} from '../../utilities/HelperFunction';
 

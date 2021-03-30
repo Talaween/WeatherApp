@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import {List, Card, Input} from 'antd';
 import {ICity, IWeather} from '../../store/types';
 import {fetchForcastWeather, selectAllCities} from '../CurrentWeather/CitiesSlice';
 import {selectDisplay} from '../AppDisplay/AppDisplaySlice';
-import { useSelector, useDispatch } from 'react-redux'
 import './ForecastCityDisplay.css';
 
 export const ForecastCityDisplay: React.FC = () => {

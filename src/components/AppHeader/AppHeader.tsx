@@ -1,6 +1,6 @@
 import {PageHeader, Input} from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
 import {selectDisplay} from '../../components/AppDisplay/AppDisplaySlice';
-import { useSelector, useDispatch } from 'react-redux'
 import {setForecastFor} from '../../components/AppDisplay/AppDisplaySlice';
 import {AppConfig} from '../../App.config';
 

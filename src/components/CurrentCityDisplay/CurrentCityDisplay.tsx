@@ -1,8 +1,8 @@
 import React from 'react';
 import {Card, Button} from 'antd';
-import './CurrentCityDisplay.css';
 import { useDispatch } from 'react-redux'
 import {setForecastFor} from '../AppDisplay/AppDisplaySlice';
+import './CurrentCityDisplay.css';
 
 export interface CityProps {
     name: string;

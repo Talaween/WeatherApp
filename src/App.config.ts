@@ -3,7 +3,6 @@ export interface IWeatherAppConfig {
     appAvatar : string;
     cities : Array<string>;
     countryCode: Array<string>;
-    apiKey: string;
 }
 
 export const AppConfig:IWeatherAppConfig = {
@@ -21,8 +20,7 @@ export const AppConfig:IWeatherAppConfig = {
         'IN',
         'AU',
         'JP',
-    ],
-    apiKey: '09bc4c48c3a740e983f52f036270109a',
+    ]
 }
 
 export enum AppState {

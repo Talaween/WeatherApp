@@ -1,8 +1,8 @@
+import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
+import { ThunkAction } from 'redux-thunk';
 import { configureStore, Action, combineReducers} from '@reduxjs/toolkit'
 import citiesReducer from '../components/CurrentWeather/CitiesSlice';
 import displayReducer from '../components/AppDisplay/AppDisplaySlice';
-import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-import { ThunkAction } from 'redux-thunk';
 
 const store = configureStore({
   reducer: combineReducers({cities: citiesReducer, forecastFor: displayReducer} ),
