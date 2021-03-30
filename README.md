@@ -17,7 +17,7 @@ to setup the app after clone run
 ```sh
 npm install
 ```
-# Add your own Weather Bit API Key
+### Add your own Weather Bit API Key
 
 in order to run the app you will need to add your won weather Bit API key, to do that first in the root directory
 add a file named .env then inside this file put the following code:
