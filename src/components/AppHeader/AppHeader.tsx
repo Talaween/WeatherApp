@@ -9,7 +9,7 @@ export const AppHeader:React.FC = () => {
     const currentDisplay =  useSelector(selectDisplay);
 
     const searchControls = currentDisplay 
-                ? [<Input style={{ width: '25%' }} placeholder="Min Temp" />, 
+                ? [ <Input style={{ width: '25%' }} placeholder="Min Temp" />, 
                     <Input style={{ width: '25%' }} placeholder="Max Temp" />
                 ]
                 : [];
