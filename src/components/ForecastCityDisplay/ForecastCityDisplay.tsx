@@ -61,5 +61,8 @@ export const ForecastCityDisplay: React.FC = () => {
                     )}
                 />;
             </>
-            : null;
+            :  <List
+                    grid={{ gutter: 16, column: 4 }}
+                    dataSource={undefined}
+                />;
 }
