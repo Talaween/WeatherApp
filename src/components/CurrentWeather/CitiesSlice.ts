@@ -2,7 +2,7 @@ import { createSlice, PayloadAction  } from '@reduxjs/toolkit'
 import axios from "axios";
 import {AppThunk, RootState} from '../../store/store';
 import {AppConfig} from '../../App.config';
-import { createCity, createWeather} from '../../store/createData';
+import { createCity, createForecastWeather, createWeather} from '../../store/createData';
 import {currentWeatherAPI, forecastWeatherAPI} from '../../api/sources';
 import {ICity} from '../../store/types';
 
@@ -10,7 +10,7 @@ const initialState= AppConfig.cities.map(
             (item:string, index:number) => createCity(item, AppConfig.countryCode[index] 
         ));
 
-export const getCurrentWeather = (city:ICity): AppThunk => async (dispatch) => {
+export const fetchCurrentWeather = (city:ICity): AppThunk => async (dispatch) => {
     try {
         dispatch(setLoading({...city, isLoading:true}));
         const response = await axios.get(currentWeatherAPI(city.name, city.countryCode));
@@ -22,11 +22,11 @@ export const getCurrentWeather = (city:ICity): AppThunk => async (dispatch) => {
     }
 }
 
-export const getForcastWeather = (city:ICity): AppThunk => async (dispatch) => {
+export const fetchForcastWeather = (city:ICity): AppThunk => async (dispatch) => {
     try {
         dispatch(setLoading({...city, isLoading:true}));
         const response = await axios.get(forecastWeatherAPI(city.name, city.countryCode));
-        dispatch(updateForecastWeather({...city, currentWeather: createWeather(response.data)}));
+        dispatch(updateForecastWeather({...city, forecastWeather: createForecastWeather(response.data)}));
     } catch (error) {
         dispatch(setError({...city, error: error.toString()}));
     } finally {
@@ -56,7 +56,7 @@ export const CitiesSlice = createSlice({
     updateForecastWeather: (state, action:PayloadAction<ICity>) => {
         const city = state.find(city => city.name === action.payload.name );
         if(city) 
-            city.currentWeather = action.payload.currentWeather;
+            city.forecastWeather = action.payload.forecastWeather;
     },
   },
 });

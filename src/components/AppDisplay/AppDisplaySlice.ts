@@ -8,7 +8,8 @@ export const displaySlice = createSlice({
   initialState,
   reducers: {
     setForecastFor: (state, action:PayloadAction<string>) => {
-        state = action.payload;
+        state = action.payload
+        return state;
     },
   },
 });

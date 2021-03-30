@@ -1,6 +1,8 @@
 import React from 'react';
 import {Card, Button} from 'antd';
 import './CurrentCityDisplay.css';
+import { useDispatch } from 'react-redux'
+import {setForecastFor} from '../AppDisplay/AppDisplaySlice';
 
 export interface CityProps {
     name: string;
@@ -9,8 +11,22 @@ export interface CityProps {
 }
 export const City:React.FC<CityProps> = ({name, state, temp}:CityProps) => {
 
-    return  <Card title={name} style={{ width: 300 }} extra={ <Button type="link" size={'small'}>Weather Forecast</Button>}>
-        <p>{'Current Weather State is:'}  <span className="bold">{state}</span></p>
-        <p>{'Current Temperature is:'} <span className="bold">{temp}</span> </p>
-    </Card>;
+    const dispatch = useDispatch();
+
+    const cardExtra = <Button 
+                        type="link" 
+                        size={'small'}
+                        onClick={()=> dispatch(setForecastFor(name))}
+                        >
+                            Weather Forecast
+                        </Button>;
+
+    return  <Card 
+                title={name} 
+                style={{ width: 300 }} 
+                extra={ cardExtra }
+            >
+                <p>{'Current Weather State is:'}  <span className="bold">{state}</span></p>
+                <p>{'Current Temperature is:'} <span className="bold">{temp}</span> </p>
+            </Card>;
 }

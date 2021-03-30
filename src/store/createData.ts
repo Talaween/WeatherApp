@@ -31,9 +31,9 @@ export const createForecastWeather = (data:any):Array<IWeather> => {
             dateTime: item.datetime,
             state: item.weather.description,
             temperature : {
-                temp: data.temp,
-                min: data.low_temp,
-                max: data.max_temp,
+                temp: item.temp,
+                min: item.low_temp,
+                max: item.max_temp,
             },
         };
     });

@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import {City} from '../CurrentCityDisplay/CurrentCityDisplay';
-import {getCurrentWeather, selectAllCities} from './CitiesSlice';
+import {fetchCurrentWeather, selectAllCities} from './CitiesSlice';
 
-export const Cities:React.FC = () => {
+export const CurrentWeather:React.FC = () => {
 
     const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ export const Cities:React.FC = () => {
     useEffect (()=> {
         if(availableCities)
             availableCities.forEach(city => {
-                dispatch(getCurrentWeather(city));
+                dispatch(fetchCurrentWeather(city));
             });
     }, []);
 
