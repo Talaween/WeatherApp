@@ -2,7 +2,7 @@ import React from 'react';
 import {Card} from 'antd';
 
 export interface CityProps {
-    name: String;
+    name: string;
     min: number;
     max: number;
 }

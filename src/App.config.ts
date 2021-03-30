@@ -1,11 +1,12 @@
 
 export interface IWeatherAppConfig {
-    appAvatar : String;
-    cities : Array<String>;
-
+    appAvatar : string;
+    cities : Array<string>;
+    countryCode: Array<string>;
+    apiKey: string;
 }
 
-export const appConfig:IWeatherAppConfig = {
+export const AppConfig:IWeatherAppConfig = {
     appAvatar: 'https://icons.iconarchive.com/icons/papirus-team/papirus-apps/256/weather-icon.png',
     cities: [
         'London', 
@@ -14,5 +15,13 @@ export const appConfig:IWeatherAppConfig = {
         'Sydney',
         'Tokyo',
     ],
+    countryCode: [
+        'UK', 
+        'US',
+        'IN',
+        'AU',
+        'JP',
+    ],
+    apiKey: 'ada591dec3864456afe2c2ff2ebe6805',
 
 }
