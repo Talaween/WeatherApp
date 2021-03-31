@@ -8,18 +8,12 @@ export const AppHeader:React.FC = () => {
     const dispatch = useDispatch();
     const currentDisplay =  useSelector(selectDisplay);
 
-    const searchControls = currentDisplay 
-                ? [ <Input style={{ width: '25%' }} placeholder="Min Temp" />, 
-                    <Input style={{ width: '25%' }} placeholder="Max Temp" />
-                ]
-                : [];
-
     return  <PageHeader
         className="app-header"
         onBack={() => dispatch(setForecastFor(''))}
         title="Simple Weather App"
         subTitle="Developed with React, Redux & TypeScript..."
         avatar={{ src: AppConfig.appAvatar  }}
-        extra = {searchControls}
+        
     />
 }
